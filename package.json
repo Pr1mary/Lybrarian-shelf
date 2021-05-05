@@ -1,0 +1,31 @@
+{
+  "name": "lybrarian-shelf",
+  "version": "0.0.1",
+  "description": "bookshelf services for lybrarian project",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pr1mary/Lybrarian-shelf.git"
+  },
+  "keywords": [
+    "lybrarian",
+    "api",
+    "services",
+    "bookshelf"
+  ],
+  "author": "Rafli",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Pr1mary/Lybrarian-shelf/issues"
+  },
+  "homepage": "https://github.com/Pr1mary/Lybrarian-shelf#readme",
+  "dependencies": {
+    "dotenv": "^8.5.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7"
+  }
+}
