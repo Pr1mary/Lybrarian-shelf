@@ -5,7 +5,9 @@
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main"
+    "start": "node src/app.js",
+    "auto": "nodemon src/app.js",
+    "seed": "node db_seed/data_seed.js"
   },
   "repository": {
     "type": "git",
@@ -24,8 +26,12 @@
   },
   "homepage": "https://github.com/Pr1mary/Lybrarian-shelf#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "dotenv": "^8.5.1",
     "express": "^4.17.1",
     "mongoose": "^5.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
