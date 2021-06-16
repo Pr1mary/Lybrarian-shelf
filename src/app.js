@@ -15,11 +15,13 @@ mongoose.connect(
 
 // expressjs setup
 const express = require("express");
+const bodyparser = require("body-parser");
 const app = express();
 const port = ENV.API_PORT;
 
 // app logic routes
 const route = require("./routes/book_routes");
+app.use(bodyparser.json());
 app.use(route);
 
 // start app

@@ -13,15 +13,14 @@ const db = mongoose.connection;
 const bookMdl = require("../src/model/book_model.js");
 
 let data = new bookMdl({
-    libary_id: "123",
-    writer: "Arthur Conan Doyle",
-    publisher: "Gutenberg Foundation",
-    details:{
-        title: "The Adventures of Sherlock Holmes",
-        ISBN: "0-4456-5118-0",
-        pages: 307,
-        release: new Date("October 14, 1892")
-    },
+    libary_id: "456",
+    title: "H.P. Lovecraft: The Complete Fiction",
+    writer: "Howard Phillips Lovecraft",
+    publisher: "Barnes & Noble",
+    ISBN: "9781435122963",
+    pages: 1112,
+    release: new Date("March 18, 2011"),
+    img: "https://ms-newsouthbooks-com-au.s3.amazonaws.com/WorkImage/WorkEdition/9781435122963.jpg",
     count: 1
 });
 

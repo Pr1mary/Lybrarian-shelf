@@ -2,14 +2,13 @@ const mongoose = require("mongoose");
 
 const bookSchema = new mongoose.Schema({
     libary_id: String,
+    title: String,
     writer: String,
     publisher: String,
-    details:{
-        title: String,
-        ISBN: String,
-        pages: Number,
-        release: Date
-    },
+    ISBN: String,
+    pages: Number,
+    release: Date,
+    img: String,
     count: Number
 });
 
