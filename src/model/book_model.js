@@ -1,5 +1,9 @@
+// 
+// call for mongoose library
+// 
 const mongoose = require("mongoose");
 
+// design book schema for mongodb
 const bookSchema = new mongoose.Schema({
     libary_id: String,
     title: String,
@@ -12,8 +16,8 @@ const bookSchema = new mongoose.Schema({
     count: Number
 });
 
+// create book model based on book schema
 const bookMdl = mongoose.model("books", bookSchema);
 
-let dastr = "Help";
-
+// export book model
 module.exports = bookMdl;
