@@ -5,6 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 const fetch = require("node-fetch");
+const authPath = "http://"+process.env.AUTH_URI+":"+process.env.AUTH_PORT+"/auth";
 
 // 
 // call book model
@@ -28,7 +29,7 @@ router
     });
     
 })
-// TODO: add auth support here later
+// auth support added
 .post(async (req, res, next) => {
 
     let isApproved = false, authMsg;
@@ -40,7 +41,7 @@ router
             "token": ""+req.body.token
         };
 
-        await fetch("http://"+process.env.AUTH_URI+":"+process.env.AUTH_PORT+"/auth",
+        await fetch(authPath,
             {
                 method: "POST",
                 body: JSON.stringify(authMsg),
@@ -94,19 +95,47 @@ router
 
 })
 //  TODO: add auth support here later
-.patch((req, res, next) => {
+.patch(async (req, res, next) => {
     
     const bookId = req.params.id;
 
-    bookMdl.findByIdAndUpdate(bookId, req.body, (err, result) => {
+    try {
+
+        let isApproved = false;
+
+        let authMsg = {
+            "token": ""+req.body.token
+        };
+    
+        await fetch(authPath,
+            {
+                method: "POST",
+                body: JSON.stringify(authMsg),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                if(data.token == req.body.token) isApproved = true;
+                
+            })
+            .catch(err => console.log(err));
+
+        if(!isApproved) throw "Auth failed!";
+    
+    } catch (error) {
+        res.status(405).send({ status: "ERROR", msg: error});
+        return;
+    }
+
+    await bookMdl.findByIdAndUpdate(bookId, req.body.data, (err, result) => {
         if(err){
-            // console.log(err);
-            // res.send({ status: "ERROR", msg: err}).status(500);
-            res.status(404).send({ status: "Not Found", msg: "No ID found!"});
+            res.status(500).send({ status: "ERROR", msg: err});
         }else{
 
             if(result == null){
-                res.status(404).send({ status: "Not Found", msg: "No ID found!"});
+                res.status(404).send({ status: "ERROR", msg: "No ID found!"});
             }else{
                 res.send({ status: "OK", msg: "Update success!"});
             }
@@ -115,21 +144,49 @@ router
     });
 
 })
-// TODO: add auth support here later
-.delete((req, res, next) => {
+// auth support added
+.delete(async (req, res, next) => {
 
     const bookId = req.params.id;
 
+    try {
+
+        let isApproved = false;
+
+        let authMsg = {
+            "token": ""+req.body.token
+        };
+    
+        await fetch(authPath,
+            {
+                method: "POST",
+                body: JSON.stringify(authMsg),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                if(data.token == req.body.token) isApproved = true;
+                
+            })
+            .catch(err => console.log(err));
+
+        if(!isApproved) throw "Auth failed!";
+    
+    } catch (error) {
+        res.status(405).send({ status: "ERROR", msg: error});
+        return;
+    }
+
     bookMdl.findByIdAndDelete(bookId, (err, result) => {
-        
+            
         if(err){
-            // console.log(err);
-            // res.send({ status: "ERROR", msg: err});
-            res.status(404).send({ status: "Not Found", msg: "No ID found!"});
+            res.status(500).send({ status: "ERROR", msg: err });
         }else{
 
             if(result == null){
-                res.status(404).send({ status: "Not Found", msg: "No ID found!"});
+                res.status(404).send({ status: "ERROR", msg: "No ID found!"});
             }else{
                 res.send({ status: "OK", msg: "Delete success!"});
             }
