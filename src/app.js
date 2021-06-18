@@ -2,12 +2,11 @@
 
 // import and setup env variables from .env file
 require("dotenv").config();
-const ENV = process.env;
 
 // db connection setup
 const mongoose = require("mongoose");
 mongoose.connect(
-    "mongodb://"+ENV.DB_URI+"/"+ENV.DB_NAME,
+    "mongodb://"+process.env.DB_URI+"/"+process.env.DB_NAME,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -17,7 +16,7 @@ mongoose.connect(
 const express = require("express");
 const bodyparser = require("body-parser");
 const app = express();
-const port = ENV.API_PORT;
+const port = process.env.API_PORT || 8080;
 
 // app logic routes
 const route = require("./routes/book_routes");
