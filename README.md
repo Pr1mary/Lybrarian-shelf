@@ -101,18 +101,18 @@ body:
     token: String
     data: {
         *library_id = String
-		*title = String
-		*writer = String
-		*publisher = String
-		*ISBN = String
-		*pages = String
-		*release = String
-		*img = String
-		*count = String
+	*title = String
+	*writer = String
+	*publisher = String
+	*ISBN = String
+	*pages = String
+	*release = String
+	*img = String
+	*count = String
     }
 }
 ```
-(star * means that only insert key that needed to be changed)
+(star * is optional, only insert key that needed to be update)
 
 return:
 ```
