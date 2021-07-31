@@ -4,6 +4,9 @@
 const express = require("express");
 const router = express.Router();
 
+// 
+// setup for fetching authentication api
+// 
 const fetch = require("node-fetch");
 const authPath = "http://"+process.env.AUTH_URI+":"+process.env.AUTH_PORT+"/auth";
 
