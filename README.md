@@ -41,15 +41,18 @@ method: **POST**
 body:
 ```
 {
-    library_id: String,
-    title: String,
-    writer: String,
-    publisher: String,
-    ISBN: String,
-    pages: Integer,
-    release: Date,
-    img: String,
-    count: Integer,
+    token: String,
+    data: {
+    	library_id: String,
+    	title: String,
+    	writer: String,
+    	publisher: String,
+    	ISBN: String,
+    	pages: Integer,
+    	release: Date,
+    	img: String,
+    	count: Integer,
+    }
 }
 ```
 
